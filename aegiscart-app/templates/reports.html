@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Reportes · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">Modulo preparado</p>
+    <h1>Reportes</h1>
+    <p>Resumen funcional basado en datos reales disponibles.</p>
+</section>
+<section class="kpi-grid">
+    <article class="kpi-card"><span>Productos</span><strong>{{ dashboard.total_products }}</strong><small>activos</small></article>
+    <article class="kpi-card"><span>Ordenes</span><strong>{{ dashboard.total_orders }}</strong><small>registradas</small></article>
+    <article class="kpi-card"><span>Ingresos</span><strong>${{ "%.2f"|format(dashboard.revenue) }}</strong><small>success</small></article>
+</section>
+{% endblock %}

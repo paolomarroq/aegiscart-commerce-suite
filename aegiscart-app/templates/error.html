@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Error · AegisCart{% endblock %}
+
+{% block content %}
+<section class="result-panel error-result">
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="AegisCart">
+    <p class="eyebrow">checkout_failed</p>
+    <h1>Operacion fallida</h1>
+    <p>{{ message }}</p>
+    {% if order_id %}<span class="mono">ORD-{{ order_id }}</span>{% endif %}
+    <div class="heading-actions">
+        <a class="btn btn-primary" href="{{ url_for('cart') }}">Volver al carrito</a>
+        <a class="btn btn-ghost" href="{{ url_for('logs_view') }}">Ver trazabilidad</a>
+    </div>
+</section>
+{% endblock %}

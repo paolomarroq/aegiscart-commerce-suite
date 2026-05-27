@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Logs · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading split">
+    <div>
+        <p class="eyebrow">Observabilidad</p>
+        <h1>Logs y eventos</h1>
+        <p>Origen actual: {{ source }}. Si Elasticsearch falla, se muestran eventos locales.</p>
+    </div>
+    <a class="btn btn-ghost" href="{{ url_for('health') }}">Health JSON</a>
+</section>
+<section class="panel">
+    <div class="table-wrap">
+        <table class="data-table logs-table">
+            <thead><tr><th>Timestamp</th><th>Server</th><th>Event type</th><th>Message</th><th>Status</th></tr></thead>
+            <tbody>
+            {% for log in logs %}
+                <tr><td class="mono">{{ log.timestamp }}</td><td>{{ log.server }}</td><td class="mono">{{ log.event_type }}</td><td class="mono">{{ log.message }}</td><td><span class="badge {{ log.status|lower }}">{{ log.status }}</span></td></tr>
+            {% else %}
+                <tr><td colspan="5"><div class="empty-inline">No hay eventos registrados.</div></td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

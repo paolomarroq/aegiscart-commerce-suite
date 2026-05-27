@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Orden #{{ order.id }} · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading split">
+    <div>
+        <p class="eyebrow">Detalle de orden</p>
+        <h1>Orden #{{ order.id }}</h1>
+        <p>{{ order.customer_name }} · {{ order.customer_email }}</p>
+    </div>
+    <span class="badge {{ order.status }}">{{ order.status }}</span>
+</section>
+
+<section class="orders-layout">
+    <article class="panel">
+        <div class="panel-head"><h2>Items</h2><strong>${{ "%.2f"|format(order.total) }}</strong></div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr></thead>
+                <tbody>
+                {% for item in items %}
+                    <tr><td>{{ item.name }}</td><td>{{ item.quantity }}</td><td>${{ "%.2f"|format(item.unit_price) }}</td><td>${{ "%.2f"|format(item.subtotal) }}</td></tr>
+                {% else %}
+                    <tr><td colspan="4"><div class="empty-inline">Esta orden no tiene items.</div></td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <aside class="panel detail-card">
+        <h2>Log asociado</h2>
+        {% if order.failure_reason %}<p class="badge failed">{{ order.failure_reason }}</p>{% endif %}
+        <div class="terminal-feed">
+            {% for log in logs %}
+                <p><span>{{ log.timestamp }}</span> <b>[{{ log.status|upper }}]</b> {{ log.message }}</p>
+            {% else %}
+                <p>No se encontraron logs asociados por ID.</p>
+            {% endfor %}
+        </div>
+    </aside>
+</section>
+{% endblock %}

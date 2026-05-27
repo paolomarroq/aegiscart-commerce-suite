@@ -1,0 +1,18 @@
+Diseña una interfaz SaaS moderna para AegisCart, una Ecommerce Management Suite. Importante: AegisCart NO es una tienda, es software para e-commerce que permite gestionar productos, carritos, órdenes, clientes, monitoreo y logs.
+
+Dirección visual:
+- Usa el logo conceptual: carrito + escudo + líneas de movimiento.
+- Paleta: Midnight Navy #07111F, Indigo Core #4F46E5, Violet Ops #7C3AED, Signal Pink #EC4899, Cloud White #F8FAFC, Slate Text #64748B.
+- Tipografía sugerida: Sora/Poppins para títulos, Inter para UI, JetBrains Mono para logs.
+
+Pantalla requerida:
+Dashboard de operación e-commerce con:
+- Sidebar oscuro con AegisCart.
+- KPIs: órdenes hoy, ingresos, clientes, productos activos.
+- Sección de productos recientes.
+- Sección de carritos/checkout.
+- Panel de estado del sistema: API, base de datos, logs, monitoreo.
+- Tabla de eventos recientes: checkout_success, checkout_failed, stock_update.
+- Look minimalista, profesional, con cards redondeadas y mucho espacio en blanco.
+
+No diseñes una tienda para consumidores. Diseña una herramienta administrativa B2B para operar e-commerce.

@@ -1,0 +1,24 @@
+{
+  "name": "AegisCart",
+  "concept": "Ecommerce Management Suite",
+  "positioning": "Software para operación, monitoreo y trazabilidad de e-commerce.",
+  "recommended_visual_route": "Propuesta 1 con paleta de Propuesta 2",
+  "logo_concept": "Carrito + escudo + líneas de velocidad/gestión para comunicar software de e-commerce protegido y observable.",
+  "typography": {
+    "headings": "Sora SemiBold / Poppins SemiBold",
+    "body_ui": "Inter Regular / Manrope Regular",
+    "technical_logs": "JetBrains Mono"
+  },
+  "colors": {
+    "midnight_navy": "#07111F",
+    "indigo_core": "#4F46E5",
+    "violet_ops": "#7C3AED",
+    "signal_pink": "#EC4899",
+    "cloud_white": "#F8FAFC",
+    "slate_text": "#64748B",
+    "line_gray": "#CBD5E1",
+    "success": "#22C55E",
+    "warning": "#F59E0B",
+    "danger": "#EF4444"
+  }
+}

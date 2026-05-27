@@ -1,0 +1,39 @@
+:root {
+  --ac-midnight-navy: #07111F;
+  --ac-indigo-core: #4F46E5;
+  --ac-violet-ops: #7C3AED;
+  --ac-signal-pink: #EC4899;
+  --ac-cloud-white: #F8FAFC;
+  --ac-slate-text: #64748B;
+  --ac-line-gray: #CBD5E1;
+  --ac-success: #22C55E;
+  --ac-warning: #F59E0B;
+  --ac-danger: #EF4444;
+  --ac-font-display: "Sora", "Poppins", "Inter", sans-serif;
+  --ac-font-ui: "Inter", "Manrope", Arial, sans-serif;
+  --ac-font-code: "JetBrains Mono", monospace;
+  --ac-radius-card: 18px;
+  --ac-shadow-soft: 0 18px 48px rgba(7, 17, 31, .08);
+}
+
+body {
+  font-family: var(--ac-font-ui);
+  color: var(--ac-midnight-navy);
+  background: var(--ac-cloud-white);
+}
+
+.ac-button-primary {
+  background: linear-gradient(135deg, var(--ac-indigo-core), var(--ac-violet-ops));
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: .85rem 1.1rem;
+  font-weight: 700;
+}
+
+.ac-card {
+  background: white;
+  border: 1px solid var(--ac-line-gray);
+  border-radius: var(--ac-radius-card);
+  box-shadow: var(--ac-shadow-soft);
+}

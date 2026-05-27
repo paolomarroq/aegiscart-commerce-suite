@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading split">
+    <div>
+        <p class="eyebrow">Ecommerce Management Suite</p>
+        <h1>Dashboard de Operaciones</h1>
+        <p>Indicadores reales de productos, ordenes, clientes, carritos y trazabilidad transaccional.</p>
+    </div>
+    <div class="heading-actions">
+        <a class="btn btn-ghost" href="{{ url_for('logs_view') }}">Revisar logs</a>
+        <a class="btn btn-primary" href="{{ url_for('orders') }}">Ver ordenes</a>
+    </div>
+</section>
+
+<section class="kpi-grid">
+    <article class="kpi-card"><span>Productos</span><strong>{{ dashboard.total_products }}</strong><small>activos</small></article>
+    <article class="kpi-card"><span>Ordenes</span><strong>{{ dashboard.total_orders }}</strong><small>total</small></article>
+    <article class="kpi-card"><span>Clientes</span><strong>{{ dashboard.total_clients }}</strong><small>unicos</small></article>
+    <article class="kpi-card"><span>Ingresos</span><strong>${{ "%.2f"|format(dashboard.revenue) }}</strong><small>procesados</small></article>
+    <article class="kpi-card"><span>Conversion</span><strong>{{ dashboard.conversion }}</strong><small>success/total</small></article>
+    <article class="kpi-card critical"><span>Fallidas</span><strong>{{ dashboard.orders_failed }}</strong><small>requieren revision</small></article>
+</section>
+
+<section class="dashboard-grid">
+    <article class="panel chart-panel">
+        <div class="panel-head">
+            <h2>Ordenes procesadas</h2>
+            <span class="badge neutral">Vista operativa</span>
+        </div>
+        {% if dashboard.total_orders %}
+            <div class="line-chart">
+                <svg viewBox="0 0 680 280" role="img" aria-label="Grafica de ordenes">
+                    <polyline points="24,230 120,190 215,205 310,130 405,155 500,92 596,112 656,70" fill="none" stroke="#C3C0FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <g fill="#FCA5A5"><circle cx="24" cy="230" r="6"/><circle cx="120" cy="190" r="6"/><circle cx="215" cy="205" r="6"/><circle cx="310" cy="130" r="6"/><circle cx="405" cy="155" r="6"/><circle cx="500" cy="92" r="6"/><circle cx="596" cy="112" r="6"/><circle cx="656" cy="70" r="6"/></g>
+                </svg>
+            </div>
+        {% else %}
+            <div class="empty-state"><h2>Sin ordenes todavia</h2><p>Ejecuta un checkout para poblar esta vista.</p></div>
+        {% endif %}
+    </article>
+
+    <aside class="panel">
+        <div class="panel-head"><h2>Estado del sistema</h2></div>
+        <div class="service-grid">
+            <div class="service-tile"><i class="dot online"></i><strong>API</strong><span>{{ health.app }}</span></div>
+            <div class="service-tile"><i class="dot {% if health.database == 'ok' %}online{% else %}failed-dot{% endif %}"></i><strong>Base de datos</strong><span>{{ health.database }}</span></div>
+            <div class="service-tile"><i class="dot online"></i><strong>Logs</strong><span>local</span></div>
+            <div class="service-tile"><i class="dot {% if health.elasticsearch == 'ok' %}online{% else %}failed-dot{% endif %}"></i><strong>Elasticsearch</strong><span>{{ health.elasticsearch }}</span></div>
+        </div>
+    </aside>
+</section>
+
+<section class="dashboard-grid lower">
+    <article class="panel">
+        <div class="panel-head"><h2>Ordenes recientes</h2><a href="{{ url_for('orders') }}">Ver todo</a></div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead><tr><th>Orden</th><th>Cliente</th><th>Estado</th><th>Total</th></tr></thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td class="mono">#{{ order.id }}</td>
+                        <td>{{ order.customer_name }}</td>
+                        <td><span class="badge {{ order.status }}">{{ order.status }}</span></td>
+                        <td>${{ "%.2f"|format(order.total) }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="4"><div class="empty-inline">No hay ordenes registradas.</div></td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="panel terminal-panel">
+        <div class="panel-head"><h2>Eventos recientes</h2><span class="live">LIVE</span></div>
+        <div class="terminal-feed">
+            {% for log in logs %}
+                <p><span>{{ log.timestamp }}</span> <b>[{{ log.status|upper }}]</b> {{ log.event_type }} :: {{ log.message }}</p>
+            {% else %}
+                <p>No hay eventos registrados.</p>
+            {% endfor %}
+        </div>
+    </article>
+</section>
+{% endblock %}

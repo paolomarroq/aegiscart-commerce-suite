@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}AegisCart Command{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/aegiscart-icon.svg') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/aegiscart-icon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <a class="brand-lockup" href="{{ url_for('dashboard') }}">
+                <img src="{{ url_for('static', filename='img/aegiscart-icon.svg') }}" alt="AegisCart logo" class="brand-logo">
+                <span>
+                    <strong>AegisCart</strong>
+                    <small>COMMERCE SUITE</small>
+                </span>
+            </a>
+
+            <nav class="side-nav" aria-label="Principal">
+                <a class="nav-item {% if page == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span data-icon="grid"></span>Dashboard</a>
+                <a class="nav-item {% if page == 'products' %}active{% endif %}" href="{{ url_for('products') }}"><span data-icon="box"></span>Productos</a>
+                <a class="nav-item {% if page == 'cart' %}active{% endif %}" href="{{ url_for('cart') }}"><span data-icon="cart"></span>Carritos <em>{{ cart_count }}</em></a>
+                <a class="nav-item {% if page == 'orders' %}active{% endif %}" href="{{ url_for('orders') }}"><span data-icon="receipt"></span>Ordenes</a>
+                <a class="nav-item {% if page == 'clients' %}active{% endif %}" href="{{ url_for('clients') }}"><span data-icon="users"></span>Clientes</a>
+                <a class="nav-item {% if page == 'inventory' %}active{% endif %}" href="{{ url_for('inventory') }}"><span data-icon="inventory"></span>Inventario</a>
+                <p class="nav-section">Insights</p>
+                <a class="nav-item {% if page == 'reports' %}active{% endif %}" href="{{ url_for('reports') }}"><span data-icon="chart"></span>Reportes</a>
+                <a class="nav-item {% if page == 'monitoring' %}active{% endif %}" href="{{ url_for('monitoring') }}"><span data-icon="pulse"></span>Monitoreo</a>
+                <a class="nav-item {% if page == 'logs' %}active{% endif %}" href="{{ url_for('logs_view') }}"><span data-icon="terminal"></span>Logs</a>
+                <a class="nav-item {% if page == 'settings' %}active{% endif %}" href="{{ url_for('settings') }}"><span data-icon="gear"></span>Configuracion</a>
+            </nav>
+        </aside>
+
+        <div class="workspace">
+            <header class="topbar">
+                <button class="icon-button mobile-menu" type="button" data-toggle-sidebar aria-label="Abrir menu">
+                    <span data-icon="menu"></span>
+                </button>
+                <label class="search-box">
+                    <span data-icon="search"></span>
+                    <input type="search" placeholder="Buscar ordenes, productos o eventos...">
+                </label>
+                <div class="top-actions">
+                    <span class="system-pill"><i></i>{{ app_project }} online</span>
+                    <a class="icon-button" href="{{ url_for('health') }}" aria-label="Health"><span data-icon="pulse"></span></a>
+                    <div class="avatar">AD</div>
+                </div>
+            </header>
+
+            <main class="content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <section class="alerts">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </section>
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

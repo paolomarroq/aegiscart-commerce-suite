@@ -1,0 +1,13 @@
+[Unit]
+Description=AegisCart Flask Application
+After=network.target
+
+[Service]
+User=adminos
+WorkingDirectory=/opt/aegiscart/aegiscart-app
+EnvironmentFile=/opt/aegiscart/aegiscart-app/.env
+ExecStart=/opt/aegiscart/aegiscart-app/venv/bin/gunicorn -w 3 -b 0.0.0.0:5000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

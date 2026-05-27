@@ -1,0 +1,5 @@
+* * * * * /opt/aegiscart/scripts/aegis_connections.sh
+* * * * * /opt/aegiscart/scripts/aegis_db_status.sh
+* * * * * /opt/aegiscart/scripts/aegis_db_resources.sh
+* * * * * /opt/aegiscart/scripts/aegis_transfer_to_zbx.sh
+0 2 * * * /opt/aegiscart/scripts/aegis_app_smoke_test.sh

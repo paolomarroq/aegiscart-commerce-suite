@@ -1,0 +1,9 @@
+Crea un logo vectorial minimalista para AegisCart, una suite de software para e-commerce. El logo debe comunicar claramente que es para e-commerce, por lo que debe incluir un carrito de compras como elemento principal. Integra un escudo dentro del carrito para representar control, seguridad y trazabilidad. Añade líneas de movimiento para comunicar operación y flujo digital.
+
+Estilo: SaaS B2B moderno, limpio, profesional.
+Paleta: #07111F, #4F46E5, #7C3AED, #EC4899, #F8FAFC, #64748B.
+Tipografía: Sora o Poppins en peso semibold/bold.
+Texto: AegisCart
+Tagline: Ecommerce Management Suite
+
+Debe funcionar como icono, logo horizontal, favicon y marca para dashboard.

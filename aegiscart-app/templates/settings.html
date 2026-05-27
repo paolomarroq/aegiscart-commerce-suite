@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Configuracion · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">Modulo preparado</p>
+    <h1>Configuracion</h1>
+    <p>Vista segura de configuracion no sensible. Las credenciales se leen desde .env y no se muestran.</p>
+</section>
+<section class="panel">
+    <dl class="settings-list">
+        <dt>Entorno</dt><dd>{{ env }}</dd>
+        <dt>DB host</dt><dd>{{ db_host }}</dd>
+        <dt>Indice Elasticsearch</dt><dd>{{ elastic_index }}</dd>
+    </dl>
+</section>
+{% endblock %}

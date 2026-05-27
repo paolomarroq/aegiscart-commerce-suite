@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Carritos · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading split">
+    <div>
+        <p class="eyebrow">Simulacion administrativa</p>
+        <h1>Carrito funcional</h1>
+        <p>Usa Flask session, valida stock real y genera eventos de checkout en Elasticsearch.</p>
+    </div>
+    <form method="post" action="{{ url_for('cart_clear') }}"><button class="btn btn-ghost" type="submit">Vaciar carrito</button></form>
+</section>
+
+<section class="cart-layout">
+    <article class="panel">
+        <div class="panel-head"><h2>Productos agregados</h2><span class="badge neutral">{{ items|length }} lineas</span></div>
+        {% if items %}
+            <div class="cart-lines">
+                {% for item in items %}
+                <div class="cart-line">
+                    <div><strong>{{ item.product.name }}</strong><span>{{ item.quantity }} x ${{ "%.2f"|format(item.product.price) }}</span></div>
+                    <b>${{ "%.2f"|format(item.subtotal) }}</b>
+                    <form method="post" action="{{ url_for('cart_remove', product_id=item.product.id) }}"><button class="btn btn-small btn-muted" type="submit">Quitar</button></form>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state"><h2>Carrito vacio</h2><p>Agrega productos reales desde la lista inferior.</p></div>
+        {% endif %}
+    </article>
+
+    <aside class="panel checkout-card">
+        <h2>Checkout</h2>
+        <span>Total</span>
+        <strong>${{ "%.2f"|format(total) }}</strong>
+        <form class="admin-form" method="post" action="{{ url_for('checkout') }}">
+            <label>Cliente<input name="customer_name" value="Operador Aegis" required></label>
+            <label>Email<input name="customer_email" type="email" value="operator@aegiscart.local" required></label>
+            <button class="btn btn-primary btn-block" type="submit">Completar checkout</button>
+        </form>
+    </aside>
+</section>
+
+<section class="panel compact-panel">
+    <div class="panel-head"><h2>Agregar producto</h2></div>
+    <div class="quick-products">
+        {% for product in products %}
+        <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}">
+            <button class="quick-product" type="submit" {% if product.stock <= 0 or product.status != 'active' %}disabled{% endif %}>
+                <strong>{{ product.name }}</strong>
+                <span>${{ "%.2f"|format(product.price) }} · Stock {{ product.stock }}</span>
+            </button>
+        </form>
+        {% else %}
+            <div class="empty-inline">No hay productos activos para agregar.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

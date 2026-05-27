@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Clientes · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">Clientes derivados de ordenes</p>
+    <h1>Clientes</h1>
+    <p>Vista basica calculada desde las ordenes reales registradas.</p>
+</section>
+<section class="panel">
+    <table class="data-table">
+        <thead><tr><th>Nombre</th><th>Email</th><th>Ordenes</th><th>Total comprado</th></tr></thead>
+        <tbody>
+        {% for client in clients %}
+            <tr><td>{{ client.customer_name }}</td><td>{{ client.customer_email }}</td><td>{{ client.orders_count }}</td><td>${{ "%.2f"|format(client.total_spent) }}</td></tr>
+        {% else %}
+            <tr><td colspan="4"><div class="empty-inline">No hay clientes hasta crear ordenes.</div></td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

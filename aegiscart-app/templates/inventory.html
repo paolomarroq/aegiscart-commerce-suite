@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Inventario · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">Control de stock</p>
+    <h1>Inventario</h1>
+    <p>Actualiza stock y detecta estados ok, low y out.</p>
+</section>
+<section class="panel">
+    <table class="data-table">
+        <thead><tr><th>Producto</th><th>Stock</th><th>Estado</th><th>Actualizar stock</th></tr></thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.stock }}</td>
+                <td><span class="badge {% if product.stock == 0 %}failed{% elif product.stock <= 3 %}warning{% else %}success{% endif %}">{% if product.stock == 0 %}out{% elif product.stock <= 3 %}low{% else %}ok{% endif %}</span></td>
+                <td><form class="inline-form" method="post" action="{{ url_for('inventory_update', product_id=product.id) }}"><input name="stock" type="number" min="0" value="{{ product.stock }}"><button class="btn btn-small btn-ghost" type="submit">Actualizar</button></form></td>
+            </tr>
+        {% else %}
+            <tr><td colspan="4"><div class="empty-inline">No hay productos en inventario.</div></td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

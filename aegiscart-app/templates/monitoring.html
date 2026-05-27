@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Monitoreo · AegisCart{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">Infraestructura real</p>
+    <h1>Monitoreo de servicios</h1>
+    <p>Usa la misma logica de /health para app, MariaDB y Elasticsearch.</p>
+</section>
+<section class="service-cards">
+    {% for service in services %}
+    <article class="panel service-card">
+        <div class="service-top">
+            <div><h2>{{ service.name }}</h2><span>{{ service.role }} · {{ service.ip }}</span></div>
+            <span class="badge {% if service.status == 'Online' %}success{% elif service.status == 'Failed' %}failed{% else %}warning{% endif %}">{{ service.status }}</span>
+        </div>
+        <div class="metric-row"><span>Proyecto</span><strong>AegisCart</strong></div>
+        <div class="metric-row"><span>Health DB</span><strong>{{ health.database }}</strong></div>
+        <div class="metric-row"><span>Health ELK</span><strong>{{ health.elasticsearch }}</strong></div>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

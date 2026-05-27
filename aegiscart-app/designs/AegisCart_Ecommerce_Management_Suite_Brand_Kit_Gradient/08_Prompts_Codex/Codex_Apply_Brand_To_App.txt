@@ -1,0 +1,17 @@
+Aplica el brand kit de AegisCart a una app Flask/Jinja existente.
+
+Marca:
+- AegisCart es una Ecommerce Management Suite, no una tienda para consumidores.
+- Debe sentirse como software administrativo para e-commerce.
+- Logo: carrito + escudo.
+- Paleta: #07111F, #4F46E5, #7C3AED, #EC4899, #F8FAFC, #64748B.
+- Tipografía: Sora/Poppins para títulos, Inter para UI, JetBrains Mono para logs.
+
+Tareas:
+1. Crear variables CSS con los tokens de marca.
+2. Rediseñar base.html con sidebar oscuro y header limpio.
+3. Crear dashboard con KPIs de e-commerce: órdenes, ingresos, clientes, productos.
+4. Crear cards para productos, carritos y órdenes.
+5. Crear una vista de logs/eventos con apariencia técnica.
+6. Mantener responsive design.
+7. No diseñar una tienda B2C; diseñar una herramienta de administración para e-commerce.
